@@ -58,7 +58,7 @@ describe('confusionApp', function() {
     expect(scope.tab).toEqual(1);
     scope.select(3);
 
-    expect(scope.tab).toEqual(3);
+    expect(scope.tab).toEqual(3); 
     expect(scope.filtText).toEqual('mains');
   });
 
