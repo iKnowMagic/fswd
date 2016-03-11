@@ -1,6 +1,9 @@
 {
   "name": "workspace",
   "private": true,
+  "scripts": {
+    "postinstall": "npm install -g bower gulp http-server json-server karma; bower install"
+  },
   "devDependencies": {
     "browser-sync": "^2.11.1",
     "del": "^2.2.0",
@@ -25,8 +28,5 @@
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
     "json-server": "^0.8.8"
-  },
-  "engines": {
-    "node": ">=5"
   }
 }
