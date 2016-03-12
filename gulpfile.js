@@ -34,7 +34,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('usemin', ['jshint'], function() {
-  return gulp.src('./app/**/*.html')  
+  return gulp.src('./app/**/*.html')
   .pipe(plugins.usemin({
     css: [plugins.minifyCss(), plugins.rev()],
     js: [plugins.ngAnnotate(), plugins.uglify(), plugins.rev()]
@@ -95,8 +95,3 @@ gulp.task('browser-sync', ['default'], function() {
 gulp.task('default', ['clean'], function() {
   gulp.start('usemin', 'imagemin', 'copyfonts');
 });
-
-
-
-
-
