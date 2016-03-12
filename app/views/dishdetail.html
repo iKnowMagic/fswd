@@ -4,7 +4,7 @@
         <h3>{{message}}</h3>
       </div>
       <div class="col-xs-12" ng-if="showDish">
-        <button class="btn btn-xs btn-primary pull-right" 
+        <button class="btn btn-xs btn-primary pull-right"
                 type="button" ui-sref="app.menu">
           Back to menu
         </button>
@@ -15,9 +15,9 @@
             </a>
           </div>
           <div class="media-body">
-            <h2 class="media-heading">{{dish.name}}
+            <h3 class="media-heading">{{dish.name}}
                 <span class="label label-danger">{{dish.label}}</span>
-                <span class="badge">{{dish.price | currency}}</span></h2>
+                <span class="badge">{{dish.price | currency}}</span></h3>
             <p>{{dish.description}}</p>
           </div>
         </div>
@@ -58,7 +58,7 @@
             <label for="author" class="col-sm-2 control-label">Your Name</label>
             <div class="col-sm-10">
               <input type="text" name="author" id="author" class="form-control" placeholder="Enter Your Name" ng-model="mycomment.author" required>
-              <span ng-show="commentForm.author.$error.required && 
+              <span ng-show="commentForm.author.$error.required &&
                              !commentForm.author.$pristine" class="help-block">
                Your name is required.
               </span>
@@ -88,7 +88,7 @@
             <label for="comment" class="col-sm-2 control-label">Your Comments</label>
             <div class="col-sm-10">
               <textarea name="comment" id="comment" rows="12" class="form-control" ng-model="mycomment.comment" required></textarea>
-              <span ng-show="commentForm.comment.$error.required && 
+              <span ng-show="commentForm.comment.$error.required &&
                              !commentForm.comment.$pristine" class="help-block">
                Your comments are required.
               </span>

@@ -30,15 +30,22 @@ describe('conFusion App E2E Testing', function() {
         .toEqual('Uthapizza Hot $4.99');
     });
 
-    it('should show the first comment author as', function() {
-      expect(element.all(by.repeater('comment in dish.comments')).count())
-        .toEqual(6);
-
-      var author = element.all(by.repeater('comment in dish.comments'))
-        .first().element(by.binding('comment.author'));
-
-      expect(author.getText()).toContain('John Lemon');
+    it('should show the number of comments as', function() {
+         expect(element.all(by.repeater('comment in dish.comments'))
+            .count()).toEqual(6);
     });
+
+    it('should show the first comment author as', function() {
+          element(by.model('myOrder')).sendKeys('author');
+            expect(element.all(by.repeater('comment in dish.comments'))
+            .count()).toEqual(6);
+          var author = element.all(by.repeater('comment in dish.comments'))
+                      .first().element(by.binding('comment.author'));
+
+          expect(author.getText()).toContain('25 Cent');
+
+    });
+
   });
 
 
