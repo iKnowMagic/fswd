@@ -2,7 +2,7 @@
   "name": "workspace",
   "private": true,
   "scripts": {
-    "postinstall": "npm install -g bower gulp http-server json-server karma; bower install; gulp"
+    "postinstall": "npm install bower gulp http-server json-server karma-cli protractor -g && webdriver-manager update && bower install && gulp"
   },
   "devDependencies": {
     "browser-sync": "^2.11.1",
