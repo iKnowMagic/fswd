@@ -66,7 +66,7 @@ angular.module('confusionApp')
 
 }])
 
-.controller('FeedbackController', ['$scope', function($scope) {
+.controller('FeedbackController', ['$scope', 'feedbackFactory', function($scope, feedbackFactory) {
 
   $scope.sendFeedback = function() {
 
@@ -76,6 +76,12 @@ angular.module('confusionApp')
       $scope.invalidChannelSelection = true;
       console.log('incorrect');
     } else {
+      /*
+      Assignment 4 - Task 3
+      Update FeedbackController to save the feedback information to the server.
+      */
+      feedbackFactory.feedback().save($scope.feedback);
+      
       $scope.invalidChannelSelection = false;
       $scope.feedback = {
         mychannel: "",
@@ -124,7 +130,7 @@ angular.module('confusionApp')
     console.log($scope.mycomment);
 
     $scope.dish.comments.push($scope.mycomment);
-    
+
     menuFactory.getDishes().update({id: $scope.dish.id}, $scope.dish);
 
     $scope.commentForm.$setPristine();
@@ -141,9 +147,10 @@ angular.module('confusionApp')
 // implement the IndexController and About Controller here
 
 .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
+
   $scope.showDish = false;
   $scope.message = 'Loading ...';
-  
+
   menuFactory.getDishes().get({id:0})
     .$promise.then(
     function(response) {
@@ -154,12 +161,63 @@ angular.module('confusionApp')
       $scope.message = "Error: " + response.status + ' ' + response.statusText;
     }
   );
-  $scope.promotion = menuFactory.getPromotion(0);
-  $scope.executiveChef = corporateFactory.getLeader(3);
+
+  /*
+  Assignment 4 - Task 1
+  Update the IndexController to render the promotion data.
+  You should handle the error condition appropriately.
+  */
+  $scope.showPromotion = false;
+  $scope.messagePromotion = 'Loading ...';
+  menuFactory.getPromotions().get({id:0})
+   .$promise.then(
+     function(response) {
+       $scope.promotion = response;
+       $scope.showPromotion = true;
+     },
+     function(response) {
+       $scope.messagePromotion = "Error: " + response.status + ' ' + response.statusText;
+     }
+   );
+
+  /*
+  Assignment 4 - Task 2
+  Update IndexController to render the leadership data obtained
+  from the server, and error condition should be handled.
+  */
+  $scope.showLeader = false;
+  $scope.messageLeader = 'Loading ...';
+  corporateFactory.getLeaders().get({id:3})
+  .$promise.then(
+    function(response) {
+      $scope.leader = response;
+      $scope.showLeader = true;
+    },
+    function(response) {
+      $scope.messageLeader = "Error: " + response.status + ' ' + response.statusText;
+    }
+  );
 }])
 
 .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
-  $scope.leaders = corporateFactory.getLeaders();
+  /*
+  Assignment 4 - Task 2
+  Update AboutController to render the leadership data obtained
+  from the server, and error condition should be handled.
+  */
+  $scope.showLeaders = false;
+  $scope.message = 'Loading ...';
+
+  $scope.leaders = corporateFactory.getLeaders().query(
+    function(response) {
+      $scope.leaders = response;
+      $scope.showLeaders = true;
+    },
+    function(response) {
+      $scope.message = "Error: " + response.status + ' ' + response.statusText;
+    }
+  );
+
 }])
 
 
